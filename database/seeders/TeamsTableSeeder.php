@@ -25,7 +25,6 @@ class TeamsTableSeeder extends Seeder
                 'fee' => Arr::random([500, 1000, 2000, 5000]),
                 'rank' => Arr::random([1, 2, 3, 4]),
             ]);
-
         }
     }
 }
