@@ -56,13 +56,13 @@ class MemberController extends Controller
             // Log::info($allMember->count());
 
         // 05 - Step6
-            // $allMember = $member->all();
-            // $tokyoMembers = $allMember
-            //     ->where('area', '東京')
-            //     ->map(function ($allMember) {
-            //         return $allMember;
-            //     });
-            // Log::info($tokyoMembers);
+            $allMember = $member->all();
+            $tokyoMembers = $allMember->map(function ($member) {
+                    if ($member['area'] === '東京'){
+                        return $member;
+                    }
+                });
+            Log::info($tokyoMembers);
 
         // 05 - Step7
             // $allMember = $member->all();
@@ -91,12 +91,10 @@ class MemberController extends Controller
         return 'test';
     }
 
-    public function OutputMemberInformation(Member $member, $member_id)
+    public function outputMemberInformation(Member $member, $member_id)
     {
         // 07 - Step1
-            // $allMember = $member->all();
-            // Log::info($allMember->find($member_id));
-            // return 'OutputMemberInformation';
+            // Log::info($member->find($member_id));
     }
 
     public function searchMembers(Request $request, Member $member)
@@ -110,24 +108,26 @@ class MemberController extends Controller
             // $user = $allMember->where('age', '>=', $minAge);
             // return $user;
 
-        // 07 -Step6
+        // 07 - Step6
             $minAge = $request->input('minAge');
             $maxAge = $request->input('maxAge');
-            $allMember = $member->all();
 
-            if (!empty($minAge && $maxAge)) {
-                $outputMembers = $allMember->whereBetween('age', [$minAge, $maxAge]);
-            } elseif (!empty($minAge)) {
-                $outputMembers = $allMember->where('age', '>=', $minAge);
-            } elseif (!empty($maxAge)) {
-                $outputMembers = $allMember->where('age', '<=', $maxAge);
-            } else {
-                return $allMember;
+            if (isset($minAge, $maxAge)) {
+                $outputMembers = $member->whereBetween('age', [$minAge, $maxAge]);
             }
 
-            return $outputMembers;
+            if (isset($minAge)) {
+                $outputMembers = $member->where($minAge, '>=', 10);
+            }
 
-            // もっといい感じに書けるはず
+            if (isset($maxAge)) {
+                $outputMembers = $member->where($maxAge, '<=', 10);
+            }
+
+            return $outputMembers->get();
+
+            // それではPOSTMANから送られてきたminAgeの情報をつかってその年齢以上の情報を返してあげましょう。
+            // Membersテーブルのageが10歳以上の人を取得しreturnで返却します。
             // minAge20・maxAge21を指定すると、2名分出力される
             // minAge90・maxAge nullを指定すると 90歳以上が出力される
             // minAge null ・ maxAge nullを指定すると全員出力される
