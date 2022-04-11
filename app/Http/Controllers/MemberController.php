@@ -75,18 +75,17 @@ class MemberController extends Controller
             // Log::info($sortMembers);
 
         // 07 - Step2
-            $allMember = $member->all();
+            // $allMember = $member->all();
 
-            // $areaが東京、大阪、福岡、北海道なら該当のユーザー情報をログに表示
-            // $areaが東京、大阪、福岡、北海道以外なら「該当するユーザーはいません」とログに表示
-            // $areaがemptyなら全ユーザーの情報をログに表示
+        // 07 - Step3
+            // localhost/api/member_list/東京
+            // にアクセスすると東京のユーザー情報が一覧出力される
 
-            // if ($area === '東京') {
-            //     $tokyoArea = $allMember->where('area', '東京')->get();
-            //     Log::info($tokyoArea);
-            // } elseif($area === '鹿児島') {
-            //     Log::info('該当するユーザーはいません');
-            // };
+            // localhost/api/member_list
+            // にアクセスすると全ユーザー情報が一覧出力される
+
+            // localhost/api/member_list/鹿児島
+            // にアクセスすると該当するユーザーはいませんと出力される
 
 
         return 'test';
@@ -95,14 +94,43 @@ class MemberController extends Controller
     public function OutputMemberInformation(Member $member, $member_id)
     {
         // 07 - Step1
-        $allMember = $member->all();
-        Log::info($allMember->find($member_id));
-        return 'OutputMemberInformation';
+            // $allMember = $member->all();
+            // Log::info($allMember->find($member_id));
+            // return 'OutputMemberInformation';
     }
 
-    public function searchMembers(Request $request)
+    public function searchMembers(Request $request, Member $member)
     {
-        $minAge = $request->input('minAge');
-        return 'test';
+        // 07 - Step4
+            // $minAge = $request->input('minAge');
+            // return $minAge;
+
+        // 07 - Step5
+            // $allMember = $member->all();
+            // $user = $allMember->where('age', '>=', $minAge);
+            // return $user;
+
+        // 07 -Step6
+            $minAge = $request->input('minAge');
+            $maxAge = $request->input('maxAge');
+            $allMember = $member->all();
+
+            if (!empty($minAge && $maxAge)) {
+                $outputMembers = $allMember->whereBetween('age', [$minAge, $maxAge]);
+            } elseif (!empty($minAge)) {
+                $outputMembers = $allMember->where('age', '>=', $minAge);
+            } elseif (!empty($maxAge)) {
+                $outputMembers = $allMember->where('age', '<=', $maxAge);
+            } else {
+                return $allMember;
+            }
+
+            return $outputMembers;
+
+            // もっといい感じに書けるはず
+            // minAge20・maxAge21を指定すると、2名分出力される
+            // minAge90・maxAge nullを指定すると 90歳以上が出力される
+            // minAge null ・ maxAge nullを指定すると全員出力される
+            // minAge 90 ・ maxAge 1を指定すると誰も出力されない。
     }
 }
