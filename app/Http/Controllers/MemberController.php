@@ -56,13 +56,13 @@ class MemberController extends Controller
             // Log::info($allMember->count());
 
         // 05 - Step6
-            // $allMember = $member->all();
-            // $tokyoMembers = $allMember
-            //     ->where('area', '東京')
-            //     ->map(function ($allMember) {
-            //         return $allMember;
-            //     });
-            // Log::info($tokyoMembers);
+            $allMember = $member->all();
+            $tokyoMembers = $allMember->map(function ($member) {
+                    if ($member['area'] === '東京'){
+                        return $member;
+                    }
+                });
+            Log::info($tokyoMembers);
 
         // 05 - Step7
             // $allMember = $member->all();
@@ -74,29 +74,34 @@ class MemberController extends Controller
             // $sortMembers = $allMember->sortByDesc('age');
             // Log::info($sortMembers);
 
+
         // 07 - Step2
             // $allMember = $member->all();
 
         // 07 - Step3
-            // localhost/api/member_list/東京
-            // にアクセスすると東京のユーザー情報が一覧出力される
+        $isEmptyArea = $member->getMemberArea($area)->isEmpty();
 
-            // localhost/api/member_list
-            // にアクセスすると全ユーザー情報が一覧出力される
+        if (isset($area)) {
+            $area = $member->getMemberArea($area);
+            Log::info(json_encode($area, JSON_UNESCAPED_UNICODE));
+        }
 
-            // localhost/api/member_list/鹿児島
-            // にアクセスすると該当するユーザーはいませんと出力される
+        if (!isset($area)) {
+            $area = $member->all();
+            Log::info(json_encode($area, JSON_UNESCAPED_UNICODE));
+        }
 
+        if ($isEmptyArea && isset($area)) {
+            Log::info('該当するユーザーはいません');
+        }
 
         return 'test';
     }
 
-    public function OutputMemberInformation(Member $member, $member_id)
+    public function outputMemberInformation(Member $member, $getId)
     {
         // 07 - Step1
-            // $allMember = $member->all();
-            // Log::info($allMember->find($member_id));
-            // return 'OutputMemberInformation';
+            // Log::info($member->find($getId));
     }
 
     public function searchMembers(Request $request, Member $member)
@@ -110,24 +115,26 @@ class MemberController extends Controller
             // $user = $allMember->where('age', '>=', $minAge);
             // return $user;
 
-        // 07 -Step6
+        // 07 - Step6
             $minAge = $request->input('minAge');
             $maxAge = $request->input('maxAge');
-            $allMember = $member->all();
 
-            if (!empty($minAge && $maxAge)) {
-                $outputMembers = $allMember->whereBetween('age', [$minAge, $maxAge]);
-            } elseif (!empty($minAge)) {
-                $outputMembers = $allMember->where('age', '>=', $minAge);
-            } elseif (!empty($maxAge)) {
-                $outputMembers = $allMember->where('age', '<=', $maxAge);
-            } else {
-                return $allMember;
+            if (isset($minAge, $maxAge)) {
+                $outputMembers = $member->whereBetween('age', [$minAge, $maxAge]);
             }
 
-            return $outputMembers;
+            if (isset($minAge)) {
+                $outputMembers = $member->where($minAge, '>=', 10);
+            }
 
-            // もっといい感じに書けるはず
+            if (isset($maxAge)) {
+                $outputMembers = $member->where($maxAge, '<=', 10);
+            }
+
+            return $outputMembers->get();
+
+            // それではPOSTMANから送られてきたminAgeの情報をつかってその年齢以上の情報を返してあげましょう。
+            // Membersテーブルのageが10歳以上の人を取得しreturnで返却します。
             // minAge20・maxAge21を指定すると、2名分出力される
             // minAge90・maxAge nullを指定すると 90歳以上が出力される
             // minAge null ・ maxAge nullを指定すると全員出力される
