@@ -98,10 +98,10 @@ class MemberController extends Controller
         return 'test';
     }
 
-    public function outputMemberInformation(Member $member, $getId)
+    public function outputMemberInformation(Member $member, $member_id)
     {
         // 07 - Step1
-            // Log::info($member->find($getId));
+            // Log::info($member->find($member_id));
     }
 
     public function searchMembers(Request $request, Member $member)
