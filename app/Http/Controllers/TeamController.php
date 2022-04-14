@@ -11,8 +11,9 @@ class TeamController extends Controller
     public function showTeamList(Team $team)
     {
         // test02 - Step2
-        Log::info(json_encode($team->allTeam(), JSON_UNESCAPED_UNICODE));
-        return 'test';
+        $allTeam = $team->allTeam();
+        Log::info(json_encode($allTeam, JSON_UNESCAPED_UNICODE));
+        return $team->allTeam();
     }
 
     public function genreTeams(Team $team, $genre = null)
@@ -28,20 +29,8 @@ class TeamController extends Controller
         $minFee = $request->input('minFee');
         $maxFee = $request->input('maxFee');
 
-    // 500、1000、2000、5000
-    // 最小料金が100、最大料金が1500だとfeeが1000と1500のチームだけがヒットする。
-    // 最小料金が100の指定だけだと、全チームがヒットする。
-    // 最大料金が100の指定だと、どのチームもヒットしない。
-    // どちらの料金も指定がないと全件ヒットする。
+        $searchResult = $team->searchTeamsByFee($minFee, $maxFee);
 
-        if (isset($minFee)) {
-            $searchFee = $team->where('fee', '>=', $minFee);
-        }
-
-        if (isset($maxFee)) {
-            $searchFee = $team->where('fee', '<=', $maxFee);
-        }
-
-        return $searchFee->get();
+        return $searchResult;
     }
 }
