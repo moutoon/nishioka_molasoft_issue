@@ -21,7 +21,7 @@ class Team extends Model
         return $team;
     }
 
-    public function searchTeamsByFee($minFee, $maxFee)
+    public function searchTeamsByFee($minFee, $maxFee, $genre)
     {
 
         $query = $this->query();
@@ -32,6 +32,10 @@ class Team extends Model
 
         if (isset($maxFee)) {
             $query->where('fee', '<=', $maxFee);
+        }
+
+        if (isset($genre)) {
+            $query->where('genre', $genre);
         }
 
         return $query->get();
