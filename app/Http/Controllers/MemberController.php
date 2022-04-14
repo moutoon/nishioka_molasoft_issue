@@ -11,17 +11,17 @@ class MemberController extends Controller
 {
     public function showMemberList(Member $member, $area = null)
     {
-        // 04 - Step 3
-            // $id1 = $member->find(1);
-            // Log::info($id1);
+        // 04 - Step3
+            // $id1 = $member->searchId();
+            // Log::info(json_encode($id1, JSON_UNESCAPED_UNICODE));
 
         // 04 - Step4
-            // $tokyoArea = $member->where('area', '東京')->get();
-            // Log::info($tokyoArea);
+            // $tokyoAreaMember = $member->tokyoAreaMember();
+            // Log::info(json_encode($tokyoAreaMember, JSON_UNESCAPED_UNICODE));
 
         // 04 - Step5
-            // $under30 = $member->where('age', '<=', 30)->get();
-            // Log::info($under30);
+            // $ageUnder30 = $member->ageUnder30();
+            // Log::info(json_encode($ageUnder30, JSON_UNESCAPED_UNICODE));
 
         // 05 - Step1
             // $allMember = $member->all();
@@ -56,13 +56,13 @@ class MemberController extends Controller
             // Log::info($allMember->count());
 
         // 05 - Step6
-            $allMember = $member->all();
-            $tokyoMembers = $allMember->map(function ($member) {
-                    if ($member['area'] === '東京'){
-                        return $member;
-                    }
-                });
-            Log::info($tokyoMembers);
+            // $allMember = $member->all();
+            // $tokyoMembers = $allMember->map(function ($member) {
+            //         if ($member['area'] === '東京'){
+            //             return $member;
+            //         }
+            //     });
+            // Log::info($tokyoMembers);
 
         // 05 - Step7
             // $allMember = $member->all();
@@ -79,21 +79,21 @@ class MemberController extends Controller
             // $allMember = $member->all();
 
         // 07 - Step3
-        $isEmptyArea = $member->getMemberArea($area)->isEmpty();
+        // $isEmptyArea = $member->getMemberArea($area)->isEmpty();
 
-        if (isset($area)) {
-            $area = $member->getMemberArea($area);
-            Log::info(json_encode($area, JSON_UNESCAPED_UNICODE));
-        }
+        // if (isset($area)) {
+        //     $area = $member->getMemberArea($area);
+        //     Log::info(json_encode($area, JSON_UNESCAPED_UNICODE));
+        // }
 
-        if (!isset($area)) {
-            $area = $member->all();
-            Log::info(json_encode($area, JSON_UNESCAPED_UNICODE));
-        }
+        // if (!isset($area)) {
+        //     $area = $member->all();
+        //     Log::info(json_encode($area, JSON_UNESCAPED_UNICODE));
+        // }
 
-        if ($isEmptyArea && isset($area)) {
-            Log::info('該当するユーザーはいません');
-        }
+        // if ($isEmptyArea && isset($area)) {
+        //     Log::info('該当するユーザーはいません');
+        // }
 
         return 'test';
     }
@@ -102,6 +102,7 @@ class MemberController extends Controller
     {
         // 07 - Step1
             // Log::info($member->find($member_id));
+
     }
 
     public function searchMembers(Request $request, Member $member)
