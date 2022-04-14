@@ -23,4 +23,5 @@ Route::get('/member_list/{area?}', [MemberController::class, 'showMemberList']);
 Route::post('/search_members', [MemberController::class, 'searchMembers']);
 Route::get('/member_detail/{member_id}', [MemberController::class, 'outputMemberInformation']);
 Route::get('/team_list', [TeamController::class, 'showTeamList']);
-Route::get('/search_teams/{genre}', [TeamController::class, 'genreSearchTeams']);
+Route::get('/genre_teams/{genre?}', [TeamController::class, 'genreTeams']);
+Route::post('/search_teams', [TeamController::class, 'searchTeams']);

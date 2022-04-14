@@ -21,7 +21,7 @@ class TeamsTableSeeder extends Seeder
                 'id' => $i,
                 'name' => 'name' . $i,
                 'explain' => '説明' . $i,
-                'genre' => Arr::random(['サッカ', '野球', 'バンド', 'ラグビー']),
+                'genre' => Arr::random(['サッカー', '野球', 'バンド', 'ラグビー']),
                 'fee' => Arr::random([500, 1000, 2000, 5000]),
                 'rank' => Arr::random([1, 2, 3, 4]),
             ]);
