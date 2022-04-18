@@ -29,10 +29,7 @@ class TeamController extends Controller
         $minFee = $request->input('minFee');
         $maxFee = $request->input('maxFee');
         $genre = $request->input('genre');
-
-
         $searchResult = $team->searchTeamsByFee($minFee, $maxFee, $genre);
-
         return $searchResult;
     }
 }
