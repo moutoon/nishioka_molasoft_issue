@@ -21,7 +21,7 @@ class Team extends Model
         return $team;
     }
 
-    public function searchTeamsByFee($minFee, $maxFee, $genre)
+    public function searchTeams($minFee, $maxFee, $genre)
     {
 
         $query = $this->query();
