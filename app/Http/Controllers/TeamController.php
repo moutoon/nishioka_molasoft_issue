@@ -11,9 +11,15 @@ class TeamController extends Controller
     public function showTeamList(Team $team)
     {
         // test02 - Step2
-        $allTeam = $team->allTeam();
-        Log::info(json_encode($allTeam, JSON_UNESCAPED_UNICODE));
-        return 'test';
+        try {
+            $allTeam = $team->allTeam();
+            Log::info(json_encode($allTeam, JSON_UNESCAPED_UNICODE));
+            return 'test';
+        } catch (\Exception $e) {
+            Log::emergency('allTeam:' . $allTeam . 'メソッドエラー発生');
+            Log::emergency($e->getMessage());
+            return $e;
+        }
     }
 
     public function genreTeams(Team $team, $genre = null)

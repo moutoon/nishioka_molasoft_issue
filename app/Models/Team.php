@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Team extends Model
 {
@@ -11,8 +12,13 @@ class Team extends Model
 
     public function allTeam()
     {
-        $team = $this->all();
-        return $team;
+        try {
+            $team = $this->all();
+            return $team;
+        } catch (\Exception $e) {
+            Log::emergency($e->getMessage());
+            throw $e;
+        }
     }
 
     public function getGenre($genre)
