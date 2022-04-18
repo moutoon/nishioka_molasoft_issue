@@ -13,7 +13,7 @@ class TeamController extends Controller
         // test02 - Step2
         $allTeam = $team->allTeam();
         Log::info(json_encode($allTeam, JSON_UNESCAPED_UNICODE));
-        return $team->allTeam();
+        return 'test';
     }
 
     public function genreTeams(Team $team, $genre = null)
