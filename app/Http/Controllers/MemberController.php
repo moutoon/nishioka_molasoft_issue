@@ -12,7 +12,7 @@ class MemberController extends Controller
     public function showMemberList(Member $member, $area = null)
     {
         // 04 - Step3
-            // $id1 = $member->searchId();
+            // $id1 = $member->searchMemberId();
             // Log::info(json_encode($id1, JSON_UNESCAPED_UNICODE));
 
         // 04 - Step4

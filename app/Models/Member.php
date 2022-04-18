@@ -10,7 +10,7 @@ class Member extends Model
     use HasFactory;
 
     // 04 - Step3
-    public function searchId()
+    public function searchMemberId()
     {
         $id1 = $this->find(1);
         return $id1;
