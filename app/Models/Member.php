@@ -35,4 +35,19 @@ class Member extends Model
         $getArea = $this->where('area', $area)->get();
         return $getArea;
     }
+
+    // リレーション課題02
+    public function team()
+    {
+        // return $this->belongsTo(Team::class, 'teamId', 'id');
+
+        // リレーション課題02-Step4
+        return $this->belongsToMany(Team::class, 'teams_members', 'teamId', 'memberId');
+    }
+
+    public function getTeamIdInformation($user_id)
+    {
+        $team = $this->with('team')->find($user_id);
+        return $team;
+    }
 }
