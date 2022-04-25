@@ -12,7 +12,9 @@ class TeamController extends Controller
     {
         // test02 - Step2
         $allTeam = $team->allTeam();
-        Log::info(json_encode($allTeam, JSON_UNESCAPED_UNICODE));
+        // リレーション課題
+        $getAllTeamWithRank = $team->getAllTeamWithRank();
+        Log::info(json_encode($getAllTeamWithRank, JSON_UNESCAPED_UNICODE));
         return 'test';
     }
 
@@ -31,5 +33,12 @@ class TeamController extends Controller
         $genre = $request->input('genre');
         $searchResult = $team->searchTeams($minFee, $maxFee, $genre);
         return $searchResult;
+    }
+
+    public function getTeamMemberInformation(Team $team)
+    {
+        $getMemberInformation = $team->getMemberInformation();
+        Log::info(json_encode($getMemberInformation, JSON_UNESCAPED_UNICODE));
+        return 'test';
     }
 }

@@ -100,9 +100,10 @@ class MemberController extends Controller
 
     public function outputMemberInformation(Member $member, $member_id)
     {
-        // 07 - Step1
-            // Log::info($member->find($member_id));
-
+        // リレーション課題02
+        $getTeamIdInformation = $member->getTeamIdInformation($member_id);
+        Log::info(json_encode($getTeamIdInformation, JSON_UNESCAPED_UNICODE));
+        return 'test';
     }
 
     public function searchMembers(Request $request, Member $member)
@@ -133,12 +134,5 @@ class MemberController extends Controller
             }
 
             return $outputMembers->get();
-
-            // それではPOSTMANから送られてきたminAgeの情報をつかってその年齢以上の情報を返してあげましょう。
-            // Membersテーブルのageが10歳以上の人を取得しreturnで返却します。
-            // minAge20・maxAge21を指定すると、2名分出力される
-            // minAge90・maxAge nullを指定すると 90歳以上が出力される
-            // minAge null ・ maxAge nullを指定すると全員出力される
-            // minAge 90 ・ maxAge 1を指定すると誰も出力されない。
     }
 }
