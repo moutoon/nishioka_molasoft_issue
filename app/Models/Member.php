@@ -35,4 +35,10 @@ class Member extends Model
         $getArea = $this->where('area', $area)->get();
         return $getArea;
     }
+
+    // Laravel課題3 - 発展④
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class,'id', 'id');
+    }
 }

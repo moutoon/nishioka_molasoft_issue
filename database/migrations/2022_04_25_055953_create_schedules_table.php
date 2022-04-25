@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('practice_schedules', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->date('day')->comment('日付');
+            $table->date('date')->comment('日付');
             $table->string('venue')->comment('会場');
             $table->time('start')->comment('開始時間');
             $table->time('end')->comment('終了時間');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('practice_schedules');
+        Schema::dropIfExists('schedules');
     }
 };

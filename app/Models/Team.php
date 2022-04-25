@@ -47,4 +47,16 @@ class Team extends Model
         return $query->get();
 
     }
+
+    // Laravel課題3 - 問題③
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'id', 'id');
+    }
+
+    // Laravel課題3 - 発展④
+    public function getScheduleInformation()
+    {
+        return $this->with(['schedule.member'])->get();
+    }
 }

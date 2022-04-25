@@ -13,7 +13,10 @@ class TeamController extends Controller
         // test02 - Step2
         try {
             $allTeam = $team->allTeam();
-            Log::info(json_encode($allTeam, JSON_UNESCAPED_UNICODE));
+
+            // Laravel課題3 - 問題③
+            $getScheduleInformation = $team->getScheduleInformation();
+            Log::info(json_encode($getScheduleInformation, JSON_UNESCAPED_UNICODE));
             return 'test';
         } catch (\Exception $e) {
             Log::emergency('allTeam:' . $allTeam . 'メソッドエラー発生');
