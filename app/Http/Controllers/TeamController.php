@@ -14,6 +14,10 @@ class TeamController extends Controller
         try {
             $allTeam = $team->allTeam();
 
+            // リレーション課題
+            $getAllTeamWithRank = $team->getAllTeamWithRank();
+            // Log::info(json_encode($getAllTeamWithRank, JSON_UNESCAPED_UNICODE));
+
             // Laravel課題3 - 問題③
             $getScheduleInformation = $team->getScheduleInformation();
             Log::info(json_encode($getScheduleInformation, JSON_UNESCAPED_UNICODE));
@@ -40,5 +44,12 @@ class TeamController extends Controller
         $genre = $request->input('genre');
         $searchResult = $team->searchTeams($minFee, $maxFee, $genre);
         return $searchResult;
+    }
+
+    public function getTeamMemberInformation(Team $team)
+    {
+        $getMemberInformation = $team->getMemberInformation();
+        Log::info(json_encode($getMemberInformation, JSON_UNESCAPED_UNICODE));
+        return 'test';
     }
 }

@@ -48,6 +48,34 @@ class Team extends Model
 
     }
 
+    // リレーション課題01
+    public function rank()
+    {
+        return $this->hasOne(Rank::class, 'id', 'rank');
+    }
+
+    public function getAllTeamWithRank()
+    {
+        return $this->with('rank')->get();
+    }
+
+    // リレーション課題02
+    public function member()
+    {
+        return $this->hasMany(Member::class, 'teamId', 'id');
+    }
+
+    // リレーション課題02-Step4
+    public function members()
+    {
+        return $this->belongsToMember(Member::class, 'teams_members', 'memberId', 'teamId');
+    }
+
+    public function getMemberInformation()
+    {
+        return $this->with('member')->get();
+    }
+
     // Laravel課題3 - 問題③
     public function schedule()
     {

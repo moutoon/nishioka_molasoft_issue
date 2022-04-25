@@ -26,5 +26,6 @@ Route::get('/member_detail/{member_id}', [MemberController::class, 'outputMember
 Route::get('/team_list', [TeamController::class, 'showTeamList']);
 Route::get('/genre_teams/{genre?}', [TeamController::class, 'genreTeams']);
 Route::post('/search_teams', [TeamController::class, 'searchTeams']);
+Route::get('/teamMember_list', [TeamController::class, 'getTeamMemberInformation']);
 Route::get('/practice_schedules', [SchedulesController::class, 'showPracticeSchedules']);
 Route::get('/practice_details', [SchedulesController::class, 'showPracticeDetails']);
