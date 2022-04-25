@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,7 @@ Route::get('/member_detail/{member_id}', [MemberController::class, 'outputMember
 Route::get('/team_list', [TeamController::class, 'showTeamList']);
 Route::get('/genre_teams/{genre?}', [TeamController::class, 'genreTeams']);
 Route::post('/search_teams', [TeamController::class, 'searchTeams']);
+
+// Laravel振り返りテスト
+Route::get('/game_list', [GameController::class, 'showGameList']);
+Route::post('/search_games', [GameController::class, 'showSearchGames']);
