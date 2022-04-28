@@ -13,14 +13,18 @@ class TeamController extends Controller
         // test02 - Step2
         try {
             $allTeam = $team->allTeam();
+
             // リレーション課題
             $getAllTeamWithRank = $team->getAllTeamWithRank();
-            Log::info(json_encode($getAllTeamWithRank, JSON_UNESCAPED_UNICODE));
+            // Log::info(json_encode($getAllTeamWithRank, JSON_UNESCAPED_UNICODE));
+
+            // Laravel課題3 - 発展④
+            $getJoinMember = $team->getJoinMember();
+            Log::info(json_encode($getJoinMember, JSON_UNESCAPED_UNICODE));
             return 'test';
-            Log::info(json_encode($allTeam, JSON_UNESCAPED_UNICODE));
-            return 'test';
+
         } catch (\Exception $e) {
-            Log::emergency('allTeam:' . $allTeam . 'メソッドエラー発生');
+            Log::emergency('getJoinMember:' . $getJoinMember . 'メソッドエラー発生');
             Log::emergency($e->getMessage());
             return $e;
         }

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\SchedulesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/member_list/{area?}', [MemberController::class, 'showMemberList']);
 Route::post('/search_members', [MemberController::class, 'searchMembers']);
 Route::get('/member_detail/{member_id}', [MemberController::class, 'outputMemberInformation']);
+
+// Laravel課題3
 Route::get('/team_list', [TeamController::class, 'showTeamList']);
+
 Route::get('/genre_teams/{genre?}', [TeamController::class, 'genreTeams']);
 Route::post('/search_teams', [TeamController::class, 'searchTeams']);
 Route::get('/teamMember_list', [TeamController::class, 'getTeamMemberInformation']);
+Route::get('/practice_schedules', [SchedulesController::class, 'showPracticeSchedules']);
+Route::get('/practice_details', [SchedulesController::class, 'showPracticeDetails']);
