@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class TeamController extends Controller
 {
-    public function showTeamList(Team $team,)
+    public function showTeamList(Team $team)
     {
         // test02 - Step2
         try {
