@@ -22,6 +22,7 @@ class SchedulesTableSeeder extends Seeder
             'venue' => Arr::random(['京セラドーム', '東京ドーム', '福岡PayPayドーム', '札幌ドーム']),
             'start' => 1000,
             'end' => 1300,
+            'teamId' => 2,
         ]);
         DB::table('schedules')->insert([
             'id' => 2,
@@ -29,6 +30,7 @@ class SchedulesTableSeeder extends Seeder
             'venue' => Arr::random(['京セラドーム', '東京ドーム', '福岡PayPayドーム', '札幌ドーム']),
             'start' => 1300,
             'end' => 1800,
+            'teamId' => 4,
         ]);
         DB::table('schedules')->insert([
             'id' => 3,
@@ -36,6 +38,7 @@ class SchedulesTableSeeder extends Seeder
             'venue' => Arr::random(['京セラドーム', '東京ドーム', '福岡PayPayドーム', '札幌ドーム']),
             'start' => 1200,
             'end' => 1800,
+            'teamId' => 6,
         ]);
         DB::table('schedules')->insert([
             'id' => 4,
@@ -43,6 +46,7 @@ class SchedulesTableSeeder extends Seeder
             'venue' => Arr::random(['京セラドーム', '東京ドーム', '福岡PayPayドーム', '札幌ドーム']),
             'start' => 1000,
             'end' => 1300,
+            'teamId' => 8,
         ]);
         DB::table('schedules')->insert([
             'id' => 5,
@@ -50,6 +54,7 @@ class SchedulesTableSeeder extends Seeder
             'venue' => Arr::random(['京セラドーム', '東京ドーム', '福岡PayPayドーム', '札幌ドーム']),
             'start' => 1000,
             'end' => 1300,
+            'teamId' => 10,
         ]);
         DB::table('schedules')->insert([
             'id' => 6,
@@ -57,6 +62,7 @@ class SchedulesTableSeeder extends Seeder
             'venue' => Arr::random(['京セラドーム', '東京ドーム', '福岡PayPayドーム', '札幌ドーム']),
             'start' => 1000,
             'end' => 1300,
+            'teamId' => 1,
         ]);
         DB::table('schedules')->insert([
             'id' => 7,
@@ -64,6 +70,7 @@ class SchedulesTableSeeder extends Seeder
             'venue' => Arr::random(['京セラドーム', '東京ドーム', '福岡PayPayドーム', '札幌ドーム']),
             'start' => 1000,
             'end' => 1800,
+            'teamId' => 3,
         ]);
         DB::table('schedules')->insert([
             'id' => 8,
@@ -71,6 +78,7 @@ class SchedulesTableSeeder extends Seeder
             'venue' => Arr::random(['京セラドーム', '東京ドーム', '福岡PayPayドーム', '札幌ドーム']),
             'start' => 1800,
             'end' => 2000,
+            'teamId' => 5,
         ]);
         DB::table('schedules')->insert([
             'id' => 9,
@@ -78,6 +86,7 @@ class SchedulesTableSeeder extends Seeder
             'venue' => Arr::random(['京セラドーム', '東京ドーム', '福岡PayPayドーム', '札幌ドーム']),
             'start' => 1200,
             'end' => 1800,
+            'teamId' => 7,
         ]);
         DB::table('schedules')->insert([
             'id' => 10,
@@ -85,6 +94,7 @@ class SchedulesTableSeeder extends Seeder
             'venue' => Arr::random(['京セラドーム', '東京ドーム', '福岡PayPayドーム', '札幌ドーム']),
             'start' => 1000,
             'end' => 1300,
+            'teamId' => 9,
         ]);
     }
 }

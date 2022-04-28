@@ -30,14 +30,14 @@ class Schedule extends Model
     }
 
     // Laravel課題3 - 問題③
-    public function team()
+    public function teams()
     {
-        return $this->belongsTo(Team::class, 'id', 'id');
+        return $this->belongsTo(Team::class, 'id', 'teamId');
     }
 
     // Laravel課題3 - 発展④
-    public function member()
+    public function members()
     {
-        return $this->hasMany(Member::class, 'id', 'id');
+        return $this->belongsToMany(Member::class, 'schedules_members', 'scheduleId', 'memberId');
     }
 }

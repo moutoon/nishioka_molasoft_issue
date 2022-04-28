@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             TeamsTableSeeder::class,
             RanksTableSeeder::class,
             SchedulesTableSeeder::class,
+            TeamsMembersTableSeeder::class,
+            SchedulesMembersTableSeeder::class,
         ]);
     }
 }

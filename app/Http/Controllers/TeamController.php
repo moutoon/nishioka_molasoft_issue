@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class TeamController extends Controller
 {
-    public function showTeamList(Team $team)
+    public function showTeamList(Team $team,)
     {
         // test02 - Step2
         try {
@@ -18,12 +18,13 @@ class TeamController extends Controller
             $getAllTeamWithRank = $team->getAllTeamWithRank();
             // Log::info(json_encode($getAllTeamWithRank, JSON_UNESCAPED_UNICODE));
 
-            // Laravel課題3 - 問題③
-            $getScheduleInformation = $team->getScheduleInformation();
-            Log::info(json_encode($getScheduleInformation, JSON_UNESCAPED_UNICODE));
+            // Laravel課題3 - 発展④
+            $getJoinMember = $team->getJoinMember();
+            Log::info(json_encode($getJoinMember, JSON_UNESCAPED_UNICODE));
             return 'test';
+
         } catch (\Exception $e) {
-            Log::emergency('allTeam:' . $allTeam . 'メソッドエラー発生');
+            // Log::emergency('getJoinMember:' . $getJoinMember . 'メソッドエラー発生');
             Log::emergency($e->getMessage());
             return $e;
         }

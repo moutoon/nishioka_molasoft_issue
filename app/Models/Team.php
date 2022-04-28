@@ -77,14 +77,14 @@ class Team extends Model
     }
 
     // Laravel課題3 - 問題③
-    public function schedule()
+    public function schedules()
     {
-        return $this->belongsTo(Schedule::class, 'id', 'id');
+        return $this->hasMany(Schedule::class, 'teamId', 'id');
     }
 
     // Laravel課題3 - 発展④
-    public function getScheduleInformation()
+    public function getJoinMember()
     {
-        return $this->with(['schedule.member'])->get();
+        return $this->with('schedules.members')->get();
     }
 }

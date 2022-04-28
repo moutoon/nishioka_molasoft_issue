@@ -37,7 +37,7 @@ class Member extends Model
     }
 
     // リレーション課題02
-    public function team()
+    public function teams()
     {
         // return $this->belongsTo(Team::class, 'teamId', 'id');
 
@@ -52,8 +52,8 @@ class Member extends Model
     }
 
     // Laravel課題3 - 発展④
-    public function schedule()
+    public function schedules()
     {
-        return $this->belongsTo(Schedule::class,'id', 'id');
+        return $this->belongsToMany(Schedule::class, 'schedules_members', 'memberId', 'scheduleId');
     }
 }
