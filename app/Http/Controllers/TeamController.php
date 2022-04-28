@@ -24,7 +24,7 @@ class TeamController extends Controller
             return 'test';
 
         } catch (\Exception $e) {
-            // Log::emergency('getJoinMember:' . $getJoinMember . 'メソッドエラー発生');
+            Log::emergency('getJoinMember:' . $getJoinMember . 'メソッドエラー発生');
             Log::emergency($e->getMessage());
             return $e;
         }
