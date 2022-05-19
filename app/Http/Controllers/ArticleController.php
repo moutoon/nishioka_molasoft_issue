@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Services\Slack\SlackFacade;
 use Illuminate\Support\Facades\Log;
+use App\Facades\Slack;
+use App\Models\Account;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -46,21 +50,35 @@ class ArticleController extends Controller
     public function createArticle(ArticleRequest $request)
     {
         try {
+            DB::beginTransaction();
+
             $article = new Article;
-            $postData = $request->only([
-                'user_id',
+            $articleData = $request->only([
+                'account_id',
                 'text',
                 'time',
                 'genre',
             ]);
-            $article->fill($postData)->save();
+            $article->fill($articleData)->save();
+
+            // 新規投稿の際にaccount_idがaccountsテーブルに存在しないとき
+            Account::create([
+                'name'     => 'test',
+                'email'    => 'test@example.com',
+                'password' => 'password'
+            ]);
+
+            Slack::send('テスト');
+
+            DB::commit();
             return 'test';
         } catch(\Exception $e) {
             Log::emergency('記事の新規登録に失敗しました;');
             Log::emergency($e->getMessage());
+
+            DB::rollBack();
             return $e;
         }
-
     }
 
     /**
@@ -71,7 +89,7 @@ class ArticleController extends Controller
         try {
             $article = $article->getArticleDetail($id);
             $postData = $request->only([
-                'user_id',
+                'account_id',
                 'text',
                 'time',
                 'genre',
@@ -92,10 +110,17 @@ class ArticleController extends Controller
     public function deleteArticle(Article $article, $id)
     {
         try {
+            DB::beginTransaction();
+
             $article = $article->find($id);
             $article->delete();
+
+            DB::commit();
+
             return 'test';
         } catch(\Exception $e) {
+            DB::rollback();
+
             Log::emergency('記事の削除に失敗しました;');
             Log::emergency($e->getMessage());
             return $e;

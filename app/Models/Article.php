@@ -17,18 +17,18 @@ class Article extends Model
     /**
      * リレーション
      */
-    public function user()
+    public function account()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function likes()
+    public function accounts()
     {
-        return $this->hasMany(Like::class, 'likes');
+        return $this->belongsToMany(Account::class, 'likes');
     }
 
     /**
-     * 記事一覧データを取得
+     * 記事一覧情報を取得
      */
     public function getArticle()
     {
@@ -36,14 +36,14 @@ class Article extends Model
             $article = $this->get();
             return $article;
         } catch(\Exception $e) {
-            Log::emergency('記事一覧データの取得に失敗しました');
+            Log::emergency('記事一覧情報の取得に失敗しました');
             Log::emergency($e->getMessage());
             throw $e;
         }
     }
 
     /**
-     * 記事詳細データを取得
+     * 記事詳細情報を取得
      */
     public function getArticleDetail($id)
     {
@@ -51,14 +51,14 @@ class Article extends Model
             $article = $this->find($id);
             return $article;
         } catch(\Exception $e) {
-            Log::emergency('記事詳細データの取得に失敗しました');
+            Log::emergency('記事詳細情報の取得に失敗しました');
             Log::emergency($e->getMessage());
             throw $e;
         }
     }
 
     /**
-     * ジャンルを検索する
+     * 学習ジャンルを検索する
      */
     public function getGenre($genre)
     {
@@ -71,10 +71,9 @@ class Article extends Model
             return $article;
         }
         catch(\Exception $e) {
-            Log::emergency('記事ジャンルの検索に失敗しました');
+            Log::emergency('学習ジャンルの検索に失敗しました');
             Log::emergency($e->getMessage());
             throw $e;
-    }
-
+        }
     }
 }

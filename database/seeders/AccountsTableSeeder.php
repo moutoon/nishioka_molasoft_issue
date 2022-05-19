@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Like;
+use App\Models\Account;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class LikesTableSeeder extends Seeder
+class AccountsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +15,6 @@ class LikesTableSeeder extends Seeder
      */
     public function run()
     {
-        Like::factory()->count(30)->create();
-        }
+        Account::factory()->count(10)->create();
+    }
 }

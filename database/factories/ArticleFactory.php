@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,10 +19,10 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(),
+            'account_id' => Account::factory(),
             'text' => $this->faker->realText(140),
             'time' => $this->faker->numberBetween(1, 24),
-            'genre' => $this->faker->randomElement(['PHP', 'Ruby', 'Python', 'JavaScript']),
+            'genre' => $this->faker->randomElement(['PHP', 'Ruby', 'Python', 'JavaScript', 'その他の言語']),
             'created_at' => $this->faker->dateTimeBetween('-10days', '10days'),
         ];
     }

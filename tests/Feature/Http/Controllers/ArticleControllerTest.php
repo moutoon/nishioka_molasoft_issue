@@ -12,6 +12,11 @@ class ArticleControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp(): void
+    {
+        dd(env('APP_ENV'), env('DB_DATABASE'), env('DB_CONNECTION'));
+    }
+
     /**
      * @test
      */

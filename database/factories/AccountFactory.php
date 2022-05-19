@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Article;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class LikeFactory extends Factory
+class AccountFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +17,9 @@ class LikeFactory extends Factory
     public function definition()
     {
         return [
-            'account_id' => $this->faker->numberBetween(1, 30),
-            'article_id' => $this->faker->numberBetween(1, 30),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->safeEmail(),
+            'password' => $this->faker->password(),
         ];
     }
 }

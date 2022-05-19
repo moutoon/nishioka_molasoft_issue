@@ -5,8 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TeamController;
-use App\Http\Controllers\UserController;
-use App\Models\Article;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +38,6 @@ Route::get('/teamMember_list', [TeamController::class, 'getTeamMemberInformation
     route::get('/delete_article/{id}', [ArticleController::class, 'deleteArticle']);     # 削除機能
     route::get('/article_list/{genre?}', [ArticleController::class, 'getArticleGenre']); # ジャンル検索
 
-    //  ユーザー関連
-    route::get('/user', [UserController::class, 'showUser']);            # 一覧取得
-    route::get('/sort_user', [UserController::class, 'sortUserByTime']); # 時間で並び替え
+    //  アカウント関連
+    route::get('/account', [AccountController::class, 'showAccount']);            # 一覧取得
+    route::get('/sort_account', [AccountController::class, 'sortAccountByTime']); # 時間で並び替え

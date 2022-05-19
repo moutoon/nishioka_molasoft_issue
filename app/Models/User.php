@@ -41,38 +41,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    /**
-     * リレーション
-     */
-    public function articles()
-    {
-        return $this->hasMany(Article::class);
-    }
-
-    public function likes()
-    {
-        return $this->hasMany(Like::class, 'likes');
-    }
-
-    /**
-     * ユーザー情報の一覧を取得
-     */
-    public function getUser()
-    {
-        $user = $this->get();
-        return $user;
-    }
-
-    /**
-     * 学習時間を取得
-     */
-    public function getTime()
-    {
-        $time = $this->with('articles')
-            ->join('articles', 'articles.user_id', '=', 'users.id')
-            ->orderBy('articles.time', 'DESC')
-            ->get();
-        dd($time);
-    }
 }

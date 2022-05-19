@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('account_id');
             $table->string('text')->comment('記事本文');
             $table->integer('time')->comment('学習時間');
             $table->string('genre')->comment('学習したジャンル');

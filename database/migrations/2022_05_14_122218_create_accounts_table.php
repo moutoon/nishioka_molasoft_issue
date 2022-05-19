@@ -13,19 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('account_id')
-                ->constrained()
-                ->onDelete('cascade')
-                ->comment('いいねしたアカウントのID');
-
-            $table->foreignId('article_id')
-                ->constrained()
-                ->onDelete('cascade')
-                ->comment('いいねされた記事のID');
-
+            $table->string('name')->comment('アカウント名');
+            $table->string('email')->comment('メールアドレス');
+            $table->string('password')->comment('パスワード');
             $table->timestamps();
         });
     }
@@ -37,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('accounts');
     }
 };
