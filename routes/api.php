@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +28,16 @@ Route::get('/team_list', [TeamController::class, 'showTeamList']);
 Route::get('/genre_teams/{genre?}', [TeamController::class, 'genreTeams']);
 Route::post('/search_teams', [TeamController::class, 'searchTeams']);
 Route::get('/teamMember_list', [TeamController::class, 'getTeamMemberInformation']);
+
+// 自作課題（西岡）
+    // 記事関連
+    route::get('/article', [ArticleController::class, 'showArticle']);                   # 一覧取得
+    route::get('/article/{id}', [ArticleController::class, 'getArticleDetail']);         # 詳細取得
+    route::post('/create_article', [ArticleController::class, 'createArticle']);         # 新規登録機能
+    route::post('/edit_article/{id}', [ArticleController::class, 'editArticle']);        # 編集機能
+    route::get('/delete_article/{id}', [ArticleController::class, 'deleteArticle']);     # 削除機能
+    route::get('/article_list/{genre?}', [ArticleController::class, 'getArticleGenre']); # ジャンル検索
+
+    //  アカウント関連
+    route::get('/account', [AccountController::class, 'showAccount']);            # 一覧取得
+    route::get('/sort_account', [AccountController::class, 'sortAccountByTime']); # 時間で並び替え
