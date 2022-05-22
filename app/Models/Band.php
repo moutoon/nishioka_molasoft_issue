@@ -9,6 +9,8 @@ class Band extends Model
 {
     use HasFactory;
 
+    protected $table = 'bands';
+
     /**
      * リレーション
      */
