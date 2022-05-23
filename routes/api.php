@@ -31,4 +31,10 @@ Route::get('/teamMember_list', [TeamController::class, 'getTeamMemberInformation
 
 // 沼田さん課題
 Route::get('/band_list', [BandController::class, 'showBandList']);
+Route::post('/band_create', [BandController::class, 'createBand']);
+
 Route::get('/staff_list', [StaffController::class, 'showStaffList']);
+Route::post('/staff_create', [StaffController::class, 'createStaff']);
+Route::post('/staff_update', [StaffController::class, 'updateStaff']);
+Route::post('/staff_delete', [StaffController::class, 'deleteStaff']);
+

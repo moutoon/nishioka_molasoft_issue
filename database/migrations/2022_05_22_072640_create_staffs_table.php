@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('grade')->comment('学年');
             $table->string('gender')->comment('性別');
             $table->string('instrument')->comment('担当パート');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@ class Band extends Model
 {
     use HasFactory;
 
-    protected $table = 'bands';
+    protected $guarded = ['id'];
 
     /**
      * リレーション
@@ -26,12 +26,39 @@ class Band extends Model
     public function getBand()
     {
         try{
-            $staff = $this->with('staffs')->get();
-            return $staff;
+            $band = $this->with('staffs')->get();
+            return $band;
         } catch (\Exception $e) {
-            Log::emergency('バンド一覧の取得に失敗');
+            Log::emergency('バンド一覧の取得に失敗しました');
             Log::emergency($e->getMessage());
             return $e;
         }
     }
+
+    /**
+     * バンド情報の登録処理
+     */
+    public function createBandData($postData)
+    {
+        try {
+            $createData = $this->create($postData);
+            return $createData;
+        } catch (\Exception $e) {
+            Log::emergency('バンド情報の登録に失敗しました');
+            Log::emergency($e->getMessage());
+            return $e;
+        }
+    }
+
+    /**
+     * バンド登録の際に安全に部員と紐付ける
+     */
+    public function createStaffBandData($band_id)
+    {
+        $band = $this->find($band_id);
+        $staffCount = Staff::count();
+        $data = $band->staffs()->sync(rand(1, $staffCount));
+        return $data;
+    }
+
 }
