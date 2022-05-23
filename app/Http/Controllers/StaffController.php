@@ -29,7 +29,7 @@ class StaffController extends Controller
     /**
      * 部員情報の登録
      */
-    public function createStaff(Request $request, Staff $staff)
+    public function createStaff(StaffPostRequest $request, Staff $staff)
     {
         $postData = $request->only([
             'name',
@@ -61,7 +61,7 @@ class StaffController extends Controller
     /**
      * 部員情報の更新
      */
-    public function updateStaff(StaffPostRequest $request, Staff $staff)
+    public function updateStaff(Request $request, Staff $staff)
     {
         $id = $request->input('id');
         $postData = $request->only([
