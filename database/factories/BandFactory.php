@@ -17,9 +17,10 @@ class BandFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->text(10),
+            'name' => $this->faker->realText(10),
             'genre' => $this->faker->randomElement(['ジャズ', 'ロック', 'メタル', 'JPOP', 'フォーク']),
             'num_people' => $this->faker->numberBetween(1, 6),
+            'introduction' => $this->faker->realText(20),
         ];
     }
 }
