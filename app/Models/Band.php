@@ -20,6 +20,11 @@ class Band extends Model
         return $this->belongsToMany(Staff::class, 'staffs_bands');
     }
 
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
     /**
      * バンド一覧を取得
      */

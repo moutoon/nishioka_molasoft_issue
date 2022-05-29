@@ -4,6 +4,7 @@ use App\Http\Controllers\BandController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TeamController;
 
@@ -37,4 +38,6 @@ Route::get('/staff_list', [StaffController::class, 'showStaffList']);
 Route::post('/staff_create', [StaffController::class, 'createStaff']);
 Route::post('/staff_update', [StaffController::class, 'updateStaff']);
 Route::post('/staff_delete', [StaffController::class, 'deleteStaff']);
+
+Route::post('/search_reservation/', [ReservationController::class, 'showSearchReservation']);
 

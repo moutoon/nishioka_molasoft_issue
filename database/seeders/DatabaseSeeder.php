@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             StaffsTableSeeder::class,
             BandsTableSeeder::class,
             StaffsBandsTableSeeder::class,
+            ReservationsTableSeeder::class,
         ]);
     }
 }
