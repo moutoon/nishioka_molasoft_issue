@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Services\Slack\SlackFacade;
+use Slack;
 
 class ReservationController extends Controller
 {
@@ -60,6 +62,18 @@ class ReservationController extends Controller
             // 重複していなければ登録できる
             $createData = $reservation->createReservationData($postData);
             Log::info('予約の登録が完了しました');
+
+            // Slack通知
+            $studio = $createData->studio;
+            $date = $createData->date;
+            $start_time = $createData->start_time;
+            $end_time = $createData->end_time;
+            $post_slack = "${studio}：${date} ${start_time} 〜 ${end_time} 予約されました";
+
+            Slack::send($post_slack);
+
+            Log::info('slackに通知しました');
+
             return $createData;
         } catch (\Exception $e) {
             Log::emergency('予約の登録に失敗しました');
