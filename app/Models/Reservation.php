@@ -45,4 +45,38 @@ class Reservation extends Model
             return $e;
         }
     }
+
+    /**
+     * 予約時間の重複チェック
+     */
+    public function checkByDuplicates($studio, $date, $start_time, $end_time)
+    {
+        try {
+            $checked = $this->whereStudio($studio)
+                            ->where('date', $date)
+                            ->where('start_time', '<', $end_time)
+                            ->where('end_time', '>', $start_time)->get();
+            return $checked;
+        } catch (\Exception $e) {
+            Log::emergency('予約情報の重複チェックに失敗しました');
+            Log::emergency($e->getMessage());
+            return $e;
+        }
+    }
+
+    /**
+     * 予約情報の登録処理
+     */
+    public function createReservationData($postData)
+    {
+        try {
+            $createData = $this->create($postData);
+            return $createData;
+        } catch (\Exception $e) {
+            Log::emergency('予約情報の登録に失敗しました');
+            Log::emergency($e->getMessage());
+            return $e;
+        }
+    }
+
 }

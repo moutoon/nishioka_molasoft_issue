@@ -39,5 +39,6 @@ Route::post('/staff_create', [StaffController::class, 'createStaff']);
 Route::post('/staff_update', [StaffController::class, 'updateStaff']);
 Route::post('/staff_delete', [StaffController::class, 'deleteStaff']);
 
-Route::post('/search_reservation/', [ReservationController::class, 'showSearchReservation']);
+Route::post('/search_reservation', [ReservationController::class, 'showSearchReservation']);
+Route::post('/reservation_create', [ReservationController::class, 'createReservation']);
 

@@ -54,6 +54,5 @@ class BandController extends Controller
             DB::rollBack();
             return $e;
         }
-
     }
 }
