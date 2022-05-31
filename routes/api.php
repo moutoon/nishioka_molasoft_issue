@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\BandController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TeamController;
 
 /*
@@ -26,3 +29,16 @@ Route::get('/team_list', [TeamController::class, 'showTeamList']);
 Route::get('/genre_teams/{genre?}', [TeamController::class, 'genreTeams']);
 Route::post('/search_teams', [TeamController::class, 'searchTeams']);
 Route::get('/teamMember_list', [TeamController::class, 'getTeamMemberInformation']);
+
+// 沼田さん課題
+Route::get('/band_list', [BandController::class, 'showBandList']);
+Route::post('/band_create', [BandController::class, 'createBand']);
+
+Route::get('/staff_list', [StaffController::class, 'showStaffList']);
+Route::post('/staff_create', [StaffController::class, 'createStaff']);
+Route::post('/staff_update', [StaffController::class, 'updateStaff']);
+Route::post('/staff_delete', [StaffController::class, 'deleteStaff']);
+
+Route::post('/search_reservation', [ReservationController::class, 'showSearchReservation']);
+Route::post('/reservation_create', [ReservationController::class, 'createReservation']);
+

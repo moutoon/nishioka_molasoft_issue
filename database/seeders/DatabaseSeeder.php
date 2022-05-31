@@ -18,6 +18,10 @@ class DatabaseSeeder extends Seeder
             MembersTableSeeder::class,
             TeamsTableSeeder::class,
             RanksTableSeeder::class,
+            StaffsTableSeeder::class,
+            BandsTableSeeder::class,
+            StaffsBandsTableSeeder::class,
+            ReservationsTableSeeder::class,
         ]);
     }
 }
