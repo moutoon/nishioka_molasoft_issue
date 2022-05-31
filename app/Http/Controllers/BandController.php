@@ -37,13 +37,15 @@ class BandController extends Controller
             'introduction',
         ]);
 
+        $staff_id = $request->input('staff_id');
+
         try {
             DB::beginTransaction();
             $createData = $band->createBandData($postData);
             Log::info('バンド情報の登録が完了しました');
 
             $band_id = $createData->id;
-            $band->createStaffBandData($band_id);
+            $band->insertJoinTable($band_id, $staff_id);
             Log::info('バンドと部員が安全に紐付きました');
 
             DB::commit();

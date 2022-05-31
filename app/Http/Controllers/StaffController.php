@@ -44,7 +44,7 @@ class StaffController extends Controller
             Log::info('部員情報の登録が完了しました');
 
             $staff_id = $createData->id;
-            $staff->createStaffBandData($staff_id);
+            $staff->insertJoinTable($staff_id);
             Log::info('部員とバンドが安全に紐付きました');
 
             DB::commit();

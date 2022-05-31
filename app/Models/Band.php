@@ -56,14 +56,31 @@ class Band extends Model
     }
 
     /**
-     * バンド登録の際に安全に部員と紐付ける
+     * 中間テーブルに値を挿入する
      */
-    public function createStaffBandData($band_id)
+    public function insertJoinTable($band_id, $staff_id)
     {
-        $band = $this->find($band_id);
-        $staffCount = Staff::count();
-        $data = $band->staffs()->sync(rand(1, $staffCount));
-        return $data;
-    }
+        try {
+            // $staff_idを','で区切って配列にする
+            $staffIdCount = explode(',', $staff_id);
+            $band = $this->find($band_id);
 
+            // 部員情報が1人の場合
+            if ($staffIdCount == 1) {
+                $data = $band->staffs()->syncWithoutDetaching($staff_id);
+                return $data;
+            }
+
+            // 部員情報が2人以上の場合
+            if ($staffIdCount >= 2) {
+                $data = $band->staffs()->syncWithoutDetaching($staffIdCount);
+                return $data;
+            }
+
+            } catch (\Exception $e) {
+                Log::emergency('中間テーブルの登録に失敗しました');
+                Log::emergency($e->getMessage());
+                return $e;
+        }
+    }
 }

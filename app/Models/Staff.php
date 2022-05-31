@@ -86,11 +86,18 @@ class Staff extends Model
     /**
      * 部員登録の際に安全にバンドと紐付ける
      */
-    public function createStaffBandData($staff_id)
+    public function insertJoinTable($staff_id)
     {
-        $staff = $this->find($staff_id);
-        $bandCount = Band::count();
-        $data = $staff->bands()->sync(rand(1, $bandCount));
-        return $data;
+        try {
+
+            $staff = $this->find($staff_id);
+            $bandCount = Band::count();
+            $data = $staff->bands()->sync(rand(1, $bandCount));
+            return $data;
+        } catch (\Exception $e) {
+            Log::emergency('中間テーブルの登録に失敗しました');
+            Log::emergency($e->getMessage());
+            return $e;
+        }
     }
 }
